@@ -57,6 +57,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "spinnaker_camera_driver/camera.h"
 #include "spinnaker_camera_driver/cm3.h"
 #include "spinnaker_camera_driver/gh3.h"
+#include "spinnaker_camera_driver/gh2.h"
 #include "spinnaker_camera_driver/set_property.h"
 
 // Spinnaker SDK
