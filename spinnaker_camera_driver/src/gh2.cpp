@@ -59,6 +59,10 @@ void Gh2::setNewConfiguration(const SpinnakerConfig &config,
             // Set auto exposure
             setProperty(node_map_, "ExposureMode", config.exposure_mode);
             setProperty(node_map_, "ExposureAuto", config.exposure_auto);
+            if (config.exposure_auto.compare(std::string("Off")) == 0) {
+                setProperty(node_map_, "ExposureTime",
+                            static_cast< float >(config.exposure_time));
+            }
 
             // Set gain
             setProperty(node_map_, "GainAuto", config.auto_gain);
