@@ -15,7 +15,7 @@ def main():
 if __name__ == '__main__':
 
     # fetch images from bag file
-    bagfile = "./kitchen-PG3_2022-02-22-16-26-08.bag"
+    bagfile = "./kitchen-PG4_2022-04-13-17-10-26.bag"
     bag = rosbag.Bag(bagfile)
     bridge = CvBridge()
     camera_name = bagfile[bagfile.index('P'):bagfile.index('_')]
@@ -42,14 +42,17 @@ if __name__ == '__main__':
     stamp_file.close()
 
     # generate video
-    # video_name = output_dir + '.avi'
-    # images = [img for img in os.listdir(output_dir)]
-    # frame = cv2.imread(os.path.join(output_dir, images[0]))
-    # height, width, layers = frame.shape
-    # video = cv2.VideoWriter(filename=video_name, apiPreference=0,
-    #                         fourcc=cv2.VideoWriter_fourcc(*'XVID'), fps=22,
-    #                         frameSize=(width, height))
-    # for image in images:
-    #     video.write(cv2.imread(os.path.join(output_dir, image)))
-    # cv2.destroyAllWindows()
-    # video.release()
+    video_name = output_dir + '.avi'
+    filenames = os.listdir(output_dir)
+    sorted_filenames = sorted(
+        filenames, key=lambda x: int(x.split('e')[1].split('.')[0]))
+    images = [img for img in sorted_filenames]
+    frame = cv2.imread(os.path.join(output_dir, images[0]))
+    height, width, layers = frame.shape
+    video = cv2.VideoWriter(filename=video_name, apiPreference=0,
+                            fourcc=cv2.VideoWriter_fourcc(*'XVID'), fps=22,
+                            frameSize=(width, height))
+    for image in images:
+        video.write(cv2.imread(os.path.join(output_dir, image)))
+    cv2.destroyAllWindows()
+    video.release()
