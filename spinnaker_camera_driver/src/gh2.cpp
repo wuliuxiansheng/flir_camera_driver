@@ -9,12 +9,6 @@
 #include "spinnaker_camera_driver/gh2.h"
 #include "spinnaker_camera_driver/set_property.h"
 
-#include <Exception.h>
-#include <SpinGenApi/INodeMap.h>
-#include <SpinGenApi/Pointer.h>
-#include <stdexcept>
-#include <string>
-
 namespace spinnaker_camera_driver {
 Gh2::Gh2(Spinnaker::GenApi::INodeMap *node_map) : Camera(node_map) {}
 
