@@ -1,0 +1,23 @@
+<launch>
+  <arg name="record" default="0" />
+
+  <arg name="camera_name"          default="kitchen_depth" />
+  <arg name="camera_serial"        default="821312062243" />
+  <arg name="filter_option"        default="spatial,temporal,pointcloud"/>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <arg name="camera"    value="$(arg camera_name)"/>
+    <arg name="serial_no" value="$(arg camera_serial)"/>
+    <arg name="filters"   value="$(arg filter_option)"/>
+  </include>
+
+  <group if="$(arg record)">
+    <!-- record image data -->
+    <node
+        pkg="rosbag"
+        type="record"
+        name="rosbag_record"
+        args="record -o /media/chaoliu/ACTIONNET1/$(arg camera_name) -b 0 /$(arg camera_name)/color/image_raw /$(arg camera_name)/depth/color/points /$(arg camera_name)/extrinsics/depth_to_color"/>
+  </group>
+
+</launch>

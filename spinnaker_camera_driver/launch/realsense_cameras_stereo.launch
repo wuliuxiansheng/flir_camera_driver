@@ -1,0 +1,25 @@
+<launch>
+  <!-- Common parameters -->
+  <arg name="camera_name" default="kitchen_stereo" />
+
+  <arg name="left_camera_serial"        default="821312062243" />
+  <arg name="right_camera_serial"       default="821312060044" />
+  <arg name="filter_option"            default="spatial,temporal,pointcloud"/>
+
+  <group ns="$(arg camera_name)" >
+    <group ns="left" >
+      <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+      <arg name="camera"    value="left"/>
+      <arg name="serial_no" value="$(arg left_camera_serial)"/>
+      <arg name="filters"   value="$(arg filter_option)"/>
+    </group>
+
+    <group ns="right" >
+      <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+      <arg name="camera"    value="right"/>
+      <arg name="serial_no" value="$(arg right_camera_serial)"/>
+      <arg name="filters"   value="$(arg filter_option)"/>
+    </group>
+  </group>
+
+</launch>
