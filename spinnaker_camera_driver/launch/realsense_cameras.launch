@@ -1,5 +1,6 @@
 <launch>
   <arg name="record" default="0" />
+  <arg name="view" default="1" />
 
   <arg name="camera_name"          default="kitchen_depth" />
   <arg name="camera_serial"        default="821312062243" />
@@ -10,6 +11,13 @@
     <arg name="serial_no" value="$(arg camera_serial)"/>
     <arg name="filters"   value="$(arg filter_option)"/>
   </include>
+
+  <group if="$(arg view)">
+    <node name="image_view" pkg="image_view" type="image_view" respawn="false" output="screen">
+      <remap from="image" to="/kitchen_depth/color/image_raw"/>
+      <param name="autosize" value="true" />
+    </node>
+  </group>
 
   <group if="$(arg record)">
     <!-- record image data -->
